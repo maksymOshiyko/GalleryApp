@@ -1,0 +1,60 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="10.1.1" />
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+      <PackageReference Include="CloudinaryDotNet" Version="1.11.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.0-preview.1.21103.6" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0-preview.1.21102.2">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0-preview.1.21102.2" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0-preview.1.21102.2">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Data\Migrations" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\material-icon\css\material-design-iconic-font.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\material-icon\css\material-design-iconic-font.min.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\material-icon\fonts\Material-Design-Iconic-Font.eot" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\material-icon\fonts\Material-Design-Iconic-Font.svg" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\material-icon\fonts\Material-Design-Iconic-Font.ttf" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\material-icon\fonts\Material-Design-Iconic-Font.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\material-icon\fonts\Material-Design-Iconic-Font.woff2" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\montserrat\Montserrat-Bold.ttf" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\montserrat\Montserrat-BoldItalic.ttf" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\montserrat\Montserrat-ExtraLight.ttf" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\montserrat\Montserrat-ExtraLightItalic.ttf" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\montserrat\Montserrat-Italic.ttf" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\montserrat\Montserrat-Light.ttf" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\montserrat\Montserrat-Medium.ttf" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\montserrat\Montserrat-Regular.ttf" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\montserrat\Montserrat-SemiBold.ttf" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\montserrat\montserrat-v12-latin-900.eot" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\montserrat\montserrat-v12-latin-900.svg" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\montserrat\montserrat-v12-latin-900.ttf" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\montserrat\montserrat-v12-latin-900.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\montserrat\montserrat-v12-latin-900.woff2" />
+      <_ContentIncludedByDefault Remove="wwwroot\fonts\montserrat\OFL.txt" />
+      <_ContentIncludedByDefault Remove="wwwroot\scss\common\extend.scss" />
+      <_ContentIncludedByDefault Remove="wwwroot\scss\common\fonts.scss" />
+      <_ContentIncludedByDefault Remove="wwwroot\scss\common\global.scss" />
+      <_ContentIncludedByDefault Remove="wwwroot\scss\common\minxi.scss" />
+      <_ContentIncludedByDefault Remove="wwwroot\scss\common\variables.scss" />
+      <_ContentIncludedByDefault Remove="wwwroot\scss\layouts\main.scss" />
+      <_ContentIncludedByDefault Remove="wwwroot\scss\layouts\responsive.scss" />
+      <_ContentIncludedByDefault Remove="wwwroot\scss\style.scss" />
+    </ItemGroup>
+
+</Project>

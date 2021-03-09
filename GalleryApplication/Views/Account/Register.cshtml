@@ -1,0 +1,77 @@
+﻿@model GalleryApplication.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<div style="justify-content: center; align-items: center; display: flex;">
+    <form asp-controller="Account" asp-action="Register" asp-area="" style="width: 50%" autocomplete="off">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Email">Email</label>
+            <input type="email" class="form-control" asp-for="Email" placeholder="name@example.com">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="UserName">Username</label>
+            <input type="text" class="form-control" asp-for="UserName">
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password">Password</label>
+            <input type="password" class="form-control" asp-for="Password">
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="FirstName">First name</label>
+            <input type="text" class="form-control" asp-for="FirstName">
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName">Last name</label>
+            <input type="text" class="form-control" asp-for="LastName">
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Country">Select country</label>
+            <select class="form-control" asp-for="Country" asp-items="ViewBag.Countries">
+            </select>
+            <span asp-validation-for="Country" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" asp-for="Gender" value="male">
+                <label class="form-check-label" asp-for="Gender">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" asp-for="Gender" value="female">
+                <label class="form-check-label" asp-for="Gender">Female</label>
+            </div>
+            <span asp-validation-for="Gender" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DateOfBirth">Date of birth</label>
+            <input class="form-control" type="date" value="2011-08-19" asp-for="DateOfBirth">
+            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-success" style="width: 100%">Register</button>
+    </form>
+</div>
+
+@section scripts{
+ 
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+
+@* <div class="form-group"> *@
+@*     <td> *@
+@*         <label asp-for="DateOfBirth">Date of birth</label> *@
+@*     </td> *@
+@*     <td> *@
+@*         <input type="date" asp-for="DateOfBirth"/> *@
+@*     </td> *@
+@*     <td> *@
+@*         <span asp-validation-for="DateOfBirth"/> *@
+@*     </td> *@
+@* </div> *@

@@ -1,0 +1,237 @@
+﻿[
+{
+  "Email": "chris.evans@gmail.com",
+  "UserName": "chris.evans",
+  "DateOfBirth": "1981-08-13",
+  "Country" : {
+    "CountryName": "USA"
+  },
+  "MainPhotoUrl": "https://res.cloudinary.com/dckz7jjvs/image/upload/v1615298552/GalleryApp/Chris_Evans_cppti7.jpg",
+  "MainPhotoPublicId": "Chris_Evans_cppti7",
+  "FirstName": "Chris",
+  "LastName": "Evans",
+  "Gender": "male"
+},
+{
+  "Email": "robert.downey@gmail.com",
+  "UserName": "robert.downey",
+  "DateOfBirth": "1965-06-04",
+  "Country" : {
+    "CountryName": "USA"
+  },
+  "MainPhotoUrl": "https://res.cloudinary.com/dckz7jjvs/image/upload/v1615298553/GalleryApp/robert-downey-jr-photo-u154_b3bugi.jpg",
+  "MainPhotoPublicId": "robert-downey-jr-photo-u154_b3bugi",
+  "FirstName": 
+  "Robert", 
+  "LastName": "Downey",
+  "Gender": "male"
+},
+{
+  "Email": "jennifer.lawrence@gmail.com",
+  "UserName": "jennifer.lawrence",
+  "DateOfBirth": "1990-08-15",
+  "Country" : {
+    "CountryName": "USA"
+  },
+  "MainPhotoUrl": "https://res.cloudinary.com/dckz7jjvs/image/upload/v1615298552/GalleryApp/jennifer-lawrence-photo-u356_rzor5c.jpg",
+  "MainPhotoPublicId": "jennifer-lawrence-photo-u356_rzor5c",
+  "FirstName": "Jennifer",
+  "LastName": "Lawrence",
+  "Gender": "female"
+},
+{
+  "Email": "tom.hanks@gmail.com",
+  "UserName": "tom.hanks",
+  "DateOfBirth": "1956-07-09",
+  "Country" : {
+    "CountryName": "USA"
+  },
+  "MainPhotoUrl": "https://res.cloudinary.com/dckz7jjvs/image/upload/v1615298554/GalleryApp/tom-hanks-photo-u104_j4xowy.jpg",
+  "MainPhotoPublicId": "tom-hanks-photo-u104_j4xowy",
+  "FirstName": "Tom",
+  "LastName": "Hanks",
+  "Gender": "male"
+},
+{
+  "Email": "johnny.depp@gmail.com",
+  "UserName": "johnny.depp",
+  "DateOfBirth": "1963-06-09",
+  "Country" : {
+    "CountryName": "USA"
+  },
+  "MainPhotoUrl": "https://res.cloudinary.com/dckz7jjvs/image/upload/v1615298552/GalleryApp/johnny-depp-recording-artists-and-groups-photo-u159_ryaxgo.jpg",
+  "MainPhotoPublicId": "johnny-depp-recording-artists-and-groups-photo-u159_ryaxgo",
+  "FirstName": "Johnny",
+  "LastName": "Depp",
+  "Gender": "male"
+},
+{
+  "Email": "morgan.freeman@gmail.com",
+  "UserName": "morgan.freeman",
+  "DateOfBirth": "1937-06-01",
+  "Country" : {
+    "CountryName": "USA"
+  },
+  "MainPhotoUrl": "https://res.cloudinary.com/dckz7jjvs/image/upload/v1615298553/GalleryApp/morgan-freeman-recording-artists-and-groups-photo-u41_uaxgnd.jpg",
+  "MainPhotoPublicId": "morgan-freeman-recording-artists-and-groups-photo-u41_uaxgnd",
+  "FirstName": "Morgan",
+  "LastName": "Freeman",
+  "Gender": "male"
+},
+{
+  "Email": "chris.hemsworth@gmail.com",
+  "UserName": "chris.hemsworth",
+  "DateOfBirth": "1983-08-11",
+  "Country" : {
+    "CountryName": "Australia"
+  },
+  "MainPhotoUrl": "https://res.cloudinary.com/dckz7jjvs/image/upload/v1615298552/GalleryApp/chris-hemsworth-people-in-tv-photo-u10_cg9bz9.jpg",
+  "MainPhotoPublicId": "chris-hemsworth-people-in-tv-photo-u10_cg9bz9",
+  "FirstName": "Chris",
+  "LastName": "Hemsworth",
+  "Gender": "male"
+},
+{
+  "Email": "leonardo.dicaprio@gmail.com",
+  "UserName": "leonardo.dicaprio",
+  "DateOfBirth": "1974-11-11",
+  "Country" : {
+    "CountryName": "USA"
+  },
+  "MainPhotoUrl": "https://res.cloudinary.com/dckz7jjvs/image/upload/v1615298552/GalleryApp/1433037-photo-u280_aog39i.jpg",
+  "MainPhotoPublicId": "1433037-photo-u280_aog39i",
+  "FirstName": "Leonardo",
+  "LastName": "DiCaprio",
+  "Gender": "male"
+},
+{
+  "Email": "ryan.reynolds@gmail.com",
+  "UserName": "ryan.reynolds",
+  "DateOfBirth": "1976-10-23",
+  "Country" : {
+    "CountryName": "Canada"
+  },
+  "MainPhotoUrl": "https://res.cloudinary.com/dckz7jjvs/image/upload/v1615298553/GalleryApp/ryan-reynolds-people-in-tv-photo-2_kmcm4i.jpg",
+  "MainPhotoPublicId": "ryan-reynolds-people-in-tv-photo-2_kmcm4i",
+  "FirstName": "Ryan",
+  "LastName": "Reynolds",
+  "Gender": "male"
+},
+{
+  "Email": "rowan.atkinson@gmail.com",
+  "UserName": "rowan.atkinson",
+  "DateOfBirth": "1955-01-06",
+  "Country" : {
+    "CountryName": "Great Britain"
+  },
+  "MainPhotoUrl": "https://res.cloudinary.com/dckz7jjvs/image/upload/v1615298554/GalleryApp/rowan-atkinson-photo-u16_anb0vv.jpg",
+  "MainPhotoPublicId": "rowan-atkinson-photo-u16_anb0vv",
+  "FirstName": "Rowan",
+  "LastName": "Atkinson",
+  "Gender": "male"
+},
+{
+  "Email": "keanu.reeves@gmail.com",
+  "UserName": "keanu.reeves",
+  "DateOfBirth": "1964-09-02",
+  "Country" : {
+    "CountryName": "Lebanon"
+  },
+  "MainPhotoUrl": "https://res.cloudinary.com/dckz7jjvs/image/upload/v1615298553/GalleryApp/keanu-reeves-photo-u96_yx5uxo.jpg",
+  "MainPhotoPublicId": "keanu-reeves-photo-u96_yx5uxo",
+  "FirstName": "Keanu",
+  "LastName": "Reeves",
+  "Gender": "male"
+},
+{
+  "Email": "hugh.jackman@gmail.com",
+  "UserName": "hugh.jackman",
+  "DateOfBirth": "1968-10-12",
+  "Country" : {
+    "CountryName": "Australia"
+  },
+  "MainPhotoUrl": "https://res.cloudinary.com/dckz7jjvs/image/upload/v1615298552/GalleryApp/hugh-jackman-photo-u135_on0ckx.jpg",
+  "MainPhotoPublicId": "hugh-jackman-photo-u135_on0ckx",
+  "FirstName": "Hugh",
+  "LastName": "Jackman",
+  "Gender": "male"
+},
+{
+  "Email": "scarlett.johansson@gmail.com",
+  "UserName": "scarlett.johansson",
+  "DateOfBirth": "1984-11-22",
+  "Country" : {
+    "CountryName": "USA"
+  },
+  "MainPhotoUrl": "https://res.cloudinary.com/dckz7jjvs/image/upload/v1615298553/GalleryApp/scarlett-photo-u669_jbho2u.jpg",
+  "MainPhotoPublicId": "scarlett-photo-u669_jbho2u",
+  "FirstName": "Scarlett",
+  "LastName": "Johansson",
+  "Gender": "female"
+},
+{
+  "Email": "margot.robbie@gmail.com",
+  "UserName": "margot.robbie",
+  "DateOfBirth": "1990-07-02",
+  "Country" : {
+    "CountryName": "Australia"
+  },
+  "MainPhotoUrl": "https://res.cloudinary.com/dckz7jjvs/image/upload/v1615298553/GalleryApp/margot-robbie-photo-u114_dksjjw.jpg",
+  "MainPhotoPublicId": "margot-robbie-photo-u114_dksjjw",
+  "FirstName": "Margot",
+  "LastName": "Robbie",
+  "Gender": "female"
+},
+{
+  "Email": "emma.watson@gmail.com",
+  "UserName": "emma.watson",
+  "DateOfBirth": "1990-04-15",
+  "Country" : {
+    "CountryName": "France"
+  },
+  "MainPhotoUrl": "https://res.cloudinary.com/dckz7jjvs/image/upload/v1615298552/GalleryApp/emmawatson-photo-u459_w2dqk9.jpg",
+  "MainPhotoPublicId": "emmawatson-photo-u459_w2dqk9",
+  "FirstName": "Emma",
+  "LastName": "Watson",
+  "Gender": "female"
+},
+{
+  "Email": "jennifer.aniston@gmail.com",
+  "UserName": "jennifer.aniston",
+  "DateOfBirth": "1956-07-09",
+  "Country" : {
+    "CountryName": "USA"
+  },
+  "MainPhotoUrl": "https://res.cloudinary.com/dckz7jjvs/image/upload/v1615298553/GalleryApp/jennifer-aniston-football-players-soccer-photo-u102_h6xufm.jpg",
+  "MainPhotoPublicId": "jennifer-aniston-football-players-soccer-photo-u102_h6xufm",
+  "FirstName": "Jennifer",
+  "LastName": "Aniston",
+  "Gender": "female"
+},
+{
+  "Email": "anne.hathaway@gmail.com",
+  "UserName": "anne.hathaway",
+  "DateOfBirth": "1992-11-12",
+  "Country" : {
+    "CountryName": "USA"
+  },
+  "MainPhotoUrl": "https://res.cloudinary.com/dckz7jjvs/image/upload/v1615298552/GalleryApp/anne-hathaway-recording-artists-and-groups-photo-5_i4gpnw.jpg",
+  "MainPhotoPublicId": "anne-hathaway-recording-artists-and-groups-photo-5_i4gpnw",
+  "FirstName": "Anne",
+  "LastName": "Hathaway",
+  "Gender": "female"
+},
+{
+  "Email": "emilia.clarke@gmail.com",
+  "UserName": "emilia.clarke",
+  "DateOfBirth": "1986-10-23",
+  "Country" : {
+    "CountryName": "Great Britain"
+  },
+  "MainPhotoUrl": "https://res.cloudinary.com/dckz7jjvs/image/upload/v1615298552/GalleryApp/emilia-clarke-photo-u134_wdmxro.jpg",
+  "MainPhotoPublicId": "emilia-clarke-photo-u134_wdmxro",
+  "FirstName": "Emilia",
+  "LastName": "Clarke",
+  "Gender": "female"
+}
+]

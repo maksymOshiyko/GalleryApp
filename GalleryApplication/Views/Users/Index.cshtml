@@ -1,0 +1,104 @@
+﻿@model GalleryApplication.ViewModels.PaginatedUsersViewModel
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <form method="get">
+                        <div class="form-group">
+                            <label asp-for="@Model.FirstName">First name</label>
+                            <input type="text" class="form-control" asp-for="@Model.FirstName">
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.LastName">Last name</label>
+                            <input type="text" class="form-control" asp-for="@Model.LastName">
+
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Country">Select country</label>
+                            <select class="form-control" asp-for="@Model.Country" asp-items="ViewBag.Countries">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" asp-for="@Model.Gender" value="male">
+                                <label class="form-check-label" asp-for="@Model.Gender">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" asp-for="@Model.Gender" value="female">
+                                <label class="form-check-label" asp-for="@Model.Gender">Female</label>
+                            </div>
+                        </div>
+                        <input type="submit" value="Apply filters" class="btn btn-primary">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            @if (Model.Users.Count() != 0)
+            {
+                <div class="row">
+                    @for (int i = 0; i < Model.Users.Count() / 2; i++)
+                    {
+                        var user = Model.Users.ToList()[i];
+                    
+                        <div class="card col-2 m-2">
+                            <img src="@(user.MainPhotoUrl != null ? user.MainPhotoUrl : "/assets/images/user.png")" class="card-img-top" alt="image">
+                            <div class="card-body">
+                                <p class="card-text">@($"{user.FirstName} {user.LastName}")</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="row">
+                @for (int i = Model.Users.Count() / 2; i < Model.Users.Count(); i++)
+                {
+                    var user = Model.Users.ToList()[i];
+                    
+                    <div class="card col-2 m-2">
+                        <img src="@(user.MainPhotoUrl != null ? user.MainPhotoUrl : "/assets/images/user.png")" class="card-img-top" alt="image">
+                        <div class="card-body">
+                            <p class="card-text">@($"{user.FirstName} {user.LastName}")</p>
+                        </div>
+                    </div>
+                }
+                </div>
+            }
+            <ul class="pagination" style="justify-content: center; align-items: center; display: flex;">
+                @if (Model.PageViewModel.HasPreviousPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link"
+                           asp-action="Index"
+                           asp-route-country="@Model.Country"
+                           asp-route-gender="@Model.Gender"
+                           asp-route-firstName="@Model.FirstName"
+                           asp-route-lastName="@Model.LastName"
+                           asp-route-page="@(Model.PageViewModel.PageNumber - 1)">
+                            Previous
+                        </a>
+                    </li>
+                }
+                @if (Model.PageViewModel.HasNextPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link"
+                           asp-action="Index"
+                           asp-route-country="@Model.Country"
+                           asp-route-gender="@Model.Gender"
+                           asp-route-firstName="@Model.FirstName"
+                           asp-route-lastName="@Model.LastName"
+                           asp-route-page="@(Model.PageViewModel.PageNumber + 1)">
+                            Next
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
