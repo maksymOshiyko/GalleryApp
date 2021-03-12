@@ -1,0 +1,86 @@
+﻿@model AppUser
+
+@{
+    ViewBag.Title = Model.FirstName + Model.LastName;
+    Layout = "_Layout";
+}
+
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <div class="card">
+        <img src="@(Model.MainPhotoUrl != null ? Model.MainPhotoUrl : "/assets/images/user.png")" alt="@Model.FirstName" class="card-img-top img-thumbnail">
+        <div class="card-body">
+          <div>
+            <strong>First name:</strong>
+            <p>@Model.FirstName</p>
+          </div>
+          <div>
+            <strong>Last name:</strong>
+            <p>@Model.LastName</p>
+          </div>
+          <div>
+            <strong>Gender:</strong>
+            <p>@Model.Gender</p>
+          </div>
+          <div>
+            <strong>Location:</strong>
+            <p>@Model.Country.CountryName</p>
+          </div>
+          <div>
+            <strong>Date of birth:</strong>
+            <p>@Model.DateOfBirth.ToShortDateString()</p>
+          </div>
+
+        </div>
+        @if (Context.User.Identity.Name != Model.UserName)
+        {
+          <div class="card-footer text-center">
+            @if (!Model.FollowedByUsers.Select(f => f.SourceUser.UserName).Contains(Context.User.Identity.Name))
+            {
+              <form asp-controller="Users" asp-action="FollowUser" asp-route-username="@Model.UserName">
+                <button class="btn btn-success" style="width: 100%">Follow</button>
+              </form>
+            }
+            else
+            {
+              <form asp-controller="Users" asp-action="UnfollowUser" asp-route-username="@Model.UserName">
+                <button class="btn btn-danger" style="width: 100%">Unfollow</button>
+              </form>
+            }
+          </div>
+        }
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="card">
+        <h3 class="card-header text-center">Gallery</h3>
+        <div class="card-body">
+          @if (Model.Posts.Any())
+          {
+            <div class="row">
+              @foreach (var post in Model.Posts)
+              {
+                <div class="card m-2 p-0" style="width: 200px; height: 200px">
+                  <a asp-controller="Posts" asp-action="Detail" asp-route-postId="@post.PostId">
+                    <img src="@(post.PhotoUrl)"
+                         class="card-img-top" alt="image"></a>
+                </div>
+              }
+            </div>
+          }
+          else
+          {
+            <h4 class="text-center">No posts yet...</h4>
+          }
+        </div>
+        @if (Context.User.Identity.Name == Model.UserName)
+        {
+          <div class="card-footer text-center">
+            <a asp-controller="Posts" asp-action="AddPost" type="button" class="btn btn-success">Add post</a>
+          </div>
+        }
+      </div>
+      </div>
+  </div>
+</div>

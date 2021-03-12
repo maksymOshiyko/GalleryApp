@@ -9,5 +9,7 @@ namespace GalleryApplication.Interfaces
     {
         Task<IEnumerable<AppUser>> GetUsersAsync(UserFilterParams userFilterParams);
         Task<AppUser> GetUserByUsernameAsync(string username);
+        Task FollowUser(AppUser sourceUser, AppUser followedUser);
+        Task UnfollowUser(AppUser sourceUser, AppUser followedUser);
     }
 }

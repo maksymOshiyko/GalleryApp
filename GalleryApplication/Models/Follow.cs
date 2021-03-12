@@ -1,6 +1,6 @@
 ﻿namespace GalleryApplication.Models
 {
-    public class Follower
+    public class Follow
     {
         public int SourceUserId { get; set; }
         public int FollowedUserId { get; set; }

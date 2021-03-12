@@ -14,7 +14,7 @@ namespace GalleryApplication.Models
         public DateTime Created { get; set; } = DateTime.Now;
         public string Description { get; set; }
         public string PhotoUrl { get; set; }
-        public string PhotoPublicUrl { get; set; }
+        public string PhotoPublicId { get; set; }
 
         public virtual AppUser User { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }

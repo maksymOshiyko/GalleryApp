@@ -20,8 +20,8 @@ namespace GalleryApplication.Models
         public string MainPhotoPublicId { get; set; }
         public virtual Country Country { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
-        public ICollection<Follower> FollowedByUsers { get; set; }
-        public ICollection<Follower> FollowedUsers { get; set; }
+        public ICollection<Follow> FollowedByUsers { get; set; }
+        public ICollection<Follow> FollowedUsers { get; set; }
         public virtual ICollection<Like> Likes { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
     }

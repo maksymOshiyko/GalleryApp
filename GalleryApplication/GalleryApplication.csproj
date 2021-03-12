@@ -21,10 +21,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Data\Migrations" />
-    </ItemGroup>
-
-    <ItemGroup>
       <_ContentIncludedByDefault Remove="wwwroot\fonts\material-icon\css\material-design-iconic-font.css" />
       <_ContentIncludedByDefault Remove="wwwroot\fonts\material-icon\css\material-design-iconic-font.min.css" />
       <_ContentIncludedByDefault Remove="wwwroot\fonts\material-icon\fonts\Material-Design-Iconic-Font.eot" />

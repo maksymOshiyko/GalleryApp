@@ -1,22 +1,26 @@
 ﻿@{
     Layout = "_Layout";
 }
-
-<div style="justify-content: center; align-items: center; display: flex">
-  <form asp-area="" asp-action="Login" asp-controller="Account" autocomplete="off">
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+<div style="align-items: center; justify-content: center; display: flex">
+  <div class="card col-3 m-0">
+    <div class="card-body">
+      <form asp-area="" asp-action="Login" asp-controller="Account" autocomplete="off">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" name="password" aria-describedby="passwordHelp" id="password" placeholder="Password">
+          <small id="passwordHelp" class="form-text text-muted">We'll never share your password with anyone else.</small>
+        </div>
+        @if (ViewBag.LoginError == true)
+        {
+          <small class="form-text mb-2" style="color: red">Invalid credentials</small>
+        }
+        <button type="submit" class="btn btn-success" style="width: 100%">Login</button>
+      </form>
     </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" name="password" aria-describedby="passwordHelp" id="password" placeholder="Password">
-      <small id="passwordHelp" class="form-text text-muted">We'll never share your password with anyone else.</small>
-    </div>
-    @if (ViewBag.LoginError == true)
-    {
-      <small class="form-text mb-2" style="color: red">Invalid credentials</small>
-    }
-    <button type="submit" class="btn btn-success" style="width: 100%">Login</button>
-  </form>
+  </div>
 </div>
+

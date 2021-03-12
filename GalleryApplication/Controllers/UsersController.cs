@@ -6,6 +6,7 @@ using GalleryApplication.Interfaces;
 using GalleryApplication.Models;
 using GalleryApplication.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -63,5 +64,61 @@ namespace GalleryApplication.Controllers
 
             return View(viewModel);
         }
+
+        [HttpGet]
+        [Route("Users/Detail/{username}")]
+        public async Task<IActionResult> Detail([FromRoute] string username)
+        {
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
+
+            if (user == null) return RedirectToAction("NotFoundResponse", "Error");
+
+            // var item = user.FollowedByUsers.Select(f => f.SourceUser.UserName).ToList();
+            return View(user);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> FollowUser(string username)
+        {
+            var currentUser = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.Identity.Name);
+            var followedUser = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
+            
+            if (followedUser == null) return RedirectToAction("NotFoundResponse", "Error");
+
+            await _unitOfWork.UserRepository.FollowUser(currentUser, followedUser);
+
+            await _unitOfWork.Complete();
+
+            return RedirectToAction("Detail", "Users", new {username});
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UnfollowUser(string username)
+        {
+            var currentUser = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.Identity.Name);
+            var followedUser = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
+            
+            if (followedUser == null) return RedirectToAction("NotFoundResponse", "Error");
+            
+            await _unitOfWork.UserRepository.UnfollowUser(currentUser, followedUser);
+
+            await _unitOfWork.Complete();
+            
+            return RedirectToAction("Detail", "Users", new {username});
+        }
+
+        // [HttpGet]
+        // [Route("[controller]/Update")]
+        // public async Task<IActionResult> UpdateUser()
+        // {
+        //     
+        // }
+        
+        // [HttpPost]
+        // [Route("[controller]/Update")]
+        // public async Task<IActionResult> UpdateUser(IFormFile file, )
+        // {
+        //     
+        // }
     }
 }

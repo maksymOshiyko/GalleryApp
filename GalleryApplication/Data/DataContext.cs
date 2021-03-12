@@ -21,7 +21,7 @@ namespace GalleryApplication.Data
         
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
-        public virtual DbSet<Follower> Followers { get; set; }
+        public virtual DbSet<Follow> Follows { get; set; }
         public virtual DbSet<Like> Likes { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
         
@@ -29,7 +29,11 @@ namespace GalleryApplication.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-1S8GL46; Database=GalleryDb; Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-1S8GL46; Database=GalleryDb; Trusted_Connection=True;",
+                    options =>
+                    {
+                        
+                    });
             }
         }
 
@@ -41,6 +45,7 @@ namespace GalleryApplication.Data
             {
                 entity.HasOne(d => d.Post)
                     .WithMany(p => p.Comments)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasForeignKey(d => d.PostId);
 
                 entity.HasOne(d => d.Sender)
@@ -48,7 +53,7 @@ namespace GalleryApplication.Data
                     .HasForeignKey(d => d.SenderId);
             });
             
-            modelBuilder.Entity<Follower>(entity =>
+            modelBuilder.Entity<Follow>(entity =>
             {
                 entity.HasKey(e => new { e.SourceUserId, e.FollowedUserId });
 

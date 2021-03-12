@@ -90,3 +90,9 @@ E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net
 E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\bin\Debug\net5.0\Data\UserSeedData.json
 E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\bin\Debug\net5.0\CloudinaryDotNet.dll
 E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\bin\Debug\net5.0\Newtonsoft.Json.dll
+E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\bin\Debug\net5.0\package-lock.json
+E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net5.0\Razor\Views\Error\NotFoundResponse.cshtml.g.cs
+E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net5.0\Razor\Views\Users\Detail.cshtml.g.cs
+E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net5.0\Razor\Views\Posts\AddPost.cshtml.g.cs
+E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net5.0\Razor\Views\Posts\Detail.cshtml.g.cs
+E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net5.0\Razor\Views\Posts\Index.cshtml.g.cs

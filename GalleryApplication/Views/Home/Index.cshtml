@@ -4,8 +4,20 @@
     Layout = "_Layout";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to MyGallery</h1>
-    <h2><a asp-area="" asp-controller="Account" asp-action="Register">Registration</a></h2>
-    <h2><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></h2>
+<div class="container mt-5">
+    <div style="text-align: center">
+        <h1>Welcome to MyGallery</h1>
+        <p class="lead">Share your photos with all the world... all you need to do is sign up!</p>
+        @if(Context.User.Identity.Name == null)
+        {
+            <div class="text-center">
+                <a asp-area="" asp-controller="Account" asp-action="Register">
+                    <button class="btn btn-success btn-lg">Sign up</button>
+                </a>
+                <a asp-area="" asp-controller="Account" asp-action="Login">
+                    <button class="btn btn-secondary btn-lg">Login</button>
+                </a>
+            </div>
+        }
+    </div>
 </div>

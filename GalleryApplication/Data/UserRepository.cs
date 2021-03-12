@@ -56,11 +56,33 @@ namespace GalleryApplication.Data
         public async Task<AppUser> GetUserByUsernameAsync(string username)
         {
             return await _context.Users
-                .Include(f => f.FollowedUsers)
-                .Include(f => f.FollowedByUsers)
+                .Include(f => f.FollowedUsers).ThenInclude(f => f.SourceUser)
+                .Include(f => f.FollowedUsers).ThenInclude(f => f.FollowedUser)
+                .Include(f => f.FollowedByUsers).ThenInclude(f => f.SourceUser)
+                .Include(f => f.FollowedByUsers).ThenInclude(f => f.FollowedUser)
                 .Include(c => c.Country)
                 .Include(c => c.Comments)
+                .Include(l => l.Likes)
+                .Include(p => p.Posts)
                 .SingleOrDefaultAsync(x => x.UserName == username);
+        }
+
+        public async Task FollowUser(AppUser sourceUser, AppUser followedUser)
+        {
+            Follow follow = new Follow()
+            {
+                SourceUser = sourceUser,
+                FollowedUser = followedUser
+            };
+            
+            await _context.Follows.AddAsync(follow);
+        }
+        
+        public async Task UnfollowUser(AppUser sourceUser, AppUser followedUser)
+        {
+            Follow follow = await _context.Follows.SingleOrDefaultAsync(x => 
+                x.SourceUser == sourceUser && x.FollowedUser == followedUser); 
+            _context.Follows.Remove(follow);
         }
     }
 }

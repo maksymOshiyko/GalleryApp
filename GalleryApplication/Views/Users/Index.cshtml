@@ -1,13 +1,13 @@
 ﻿@model GalleryApplication.ViewModels.PaginatedUsersViewModel
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Users";
     Layout = "_Layout";
 }
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-3">
-            <div class="card">
+            <div class="card border-primary">
                 <div class="card-body">
                     <form method="get">
                         <div class="form-group">
@@ -47,8 +47,12 @@
                     {
                         var user = Model.Users.ToList()[i];
                     
-                        <div class="card col-2 m-2">
-                            <img src="@(user.MainPhotoUrl != null ? user.MainPhotoUrl : "/assets/images/user.png")" class="card-img-top" alt="image">
+                        <div class="card col-2 m-2 border-secondary p-0">
+                            <a asp-controller="Users" asp-action="Detail" asp-route-username="@user.UserName">
+                                
+                                <img src="@(user.MainPhotoUrl != null ? user.MainPhotoUrl : "/assets/images/user.png")"
+                                     class="card-img-top border-bottom border-secondary" alt="image">
+                            </a>
                             <div class="card-body">
                                 <p class="card-text">@($"{user.FirstName} {user.LastName}")</p>
                             </div>
@@ -60,8 +64,12 @@
                 {
                     var user = Model.Users.ToList()[i];
                     
-                    <div class="card col-2 m-2">
-                        <img src="@(user.MainPhotoUrl != null ? user.MainPhotoUrl : "/assets/images/user.png")" class="card-img-top" alt="image">
+                    <div class="card col-2 m-2 border-secondary p-0">
+                        <a asp-controller="Users" asp-action="Detail" asp-route-username="@user.UserName">
+                                                        
+                            <img src="@(user.MainPhotoUrl != null ? user.MainPhotoUrl : "/assets/images/user.png")"
+                                 class="card-img-top border-bottom border-secondary" alt="image">
+                        </a>
                         <div class="card-body">
                             <p class="card-text">@($"{user.FirstName} {user.LastName}")</p>
                         </div>

@@ -1,0 +1,88 @@
+﻿@model Post
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<div class="row ml-2">
+    <div class="card col-3 p-0">
+        <img class="card-img-top border-bottom" src="@Model.PhotoUrl" alt="Card image cap">
+        <div class="card-body pb-0">
+            <p class="card-title"><a asp-controller="Users" asp-action="Detail" asp-route-username="@Model.User.UserName">
+                @Model.User.UserName
+            </a> - @Model.User.FirstName @Model.User.LastName</p>
+            @if (Model.Description != string.Empty)
+            {
+                <p class="card-text">@Model.Description</p>
+            }
+            <div class="">
+                <i class="fa fa-heart" style="color: red"></i> @Model.Likes.Count()
+                <span class="float-right text-muted">Published @Model.Created.ToShortDateString()</span>
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            @if (!Model.Likes.Select(x => x.LikeSender.UserName).Contains(Context.User.Identity.Name))
+            {
+                <form asp-controller="Posts" asp-action="LikePost" asp-route-postId="@Model.PostId">
+                    <button style="width: 100%" class="btn btn-success" type="submit">Like</button>
+                </form>
+            }
+            else
+            {
+                <form asp-controller="Posts" asp-action="DeleteLike" asp-route-postId="@Model.PostId">
+                    <button style="width: 100%" class="btn btn-danger">Remove like</button>
+                </form>
+            }
+        </div>
+        @if (Model.User.UserName == Context.User.Identity.Name)
+        {
+            <div class="card-footer">
+                <form asp-controller="Posts" asp-action="DeletePost" asp-route-postId="@Model.PostId">
+                    <button style="width: 100%; color: red" class="text-center btn">Delete post</button>
+                </form>
+            </div>
+        }
+    </div>
+    <div class="col-9">
+        <div class="card">
+            <h3 class="card-header text-center">Comments</h3>
+            <div class="card-body">
+                @if (Model.Comments.Any())
+                {
+                    <ul class="list-group list-group-flush">
+                    @foreach (var comment in Model.Comments)
+                    {
+                        <li class="list-group-item">
+                            <div class="float-left">
+                                <a asp-controller="Users" asp-action="Detail" asp-route-username="@comment.Sender.UserName">
+                                    @comment.Sender.UserName:
+                                </a>
+                                @comment.Content
+                            </div>
+                            <div class="float-right">
+                                @comment.SentTime.Value.ToShortDateString()
+                            </div>
+                        </li>
+                    }
+                    </ul>                
+                }
+                else
+                {
+                    <div>No comments yet...</div>
+                }
+            </div>
+            <div class="card-footer">
+                <form asp-controller="Posts" asp-action="AddComment" method="post" autocomplete="off" 
+                      asp-route-postId="@Model.PostId" asp-route-comment="comment">
+                    <div class="input-group">
+                        <input type="text" name="comment" class="form-control input-group-sm" 
+                               placeholder="Write your comment...">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">Comment</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

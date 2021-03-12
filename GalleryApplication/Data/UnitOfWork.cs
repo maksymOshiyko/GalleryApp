@@ -18,6 +18,9 @@ namespace GalleryApplication.Data
         
         public IUserRepository UserRepository => new UserRepository(_context, _mapper);
         public ICountryRepository CountryRepository => new CountryRepository(_context);
+        public IPostRepository PostRepository => new PostRepository(_context);
+        public ILikeRepository LikeRepository => new LikeRepository(_context);
+        public ICommentRepository CommentRepository => new CommentRepository(_context);
         
         public async Task<bool> Complete()
         {

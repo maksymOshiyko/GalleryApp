@@ -155,7 +155,7 @@ namespace GalleryApplication.Data.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("GalleryApplication.Models.Follower", b =>
+            modelBuilder.Entity("GalleryApplication.Models.Follow", b =>
                 {
                     b.Property<int>("SourceUserId")
                         .HasColumnType("int");
@@ -167,7 +167,7 @@ namespace GalleryApplication.Data.Migrations
 
                     b.HasIndex("FollowedUserId");
 
-                    b.ToTable("Followers");
+                    b.ToTable("Follows");
                 });
 
             modelBuilder.Entity("GalleryApplication.Models.Like", b =>
@@ -199,14 +199,14 @@ namespace GalleryApplication.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("Created")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PhotoId")
-                        .HasColumnType("int");
+                    b.Property<string>("PhotoPublicId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhotoUrl")
                         .HasColumnType("nvarchar(max)");
@@ -366,7 +366,8 @@ namespace GalleryApplication.Data.Migrations
                 {
                     b.HasOne("GalleryApplication.Models.Post", "Post")
                         .WithMany("Comments")
-                        .HasForeignKey("PostId");
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("GalleryApplication.Models.AppUser", "Sender")
                         .WithMany("Comments")
@@ -377,7 +378,7 @@ namespace GalleryApplication.Data.Migrations
                     b.Navigation("Sender");
                 });
 
-            modelBuilder.Entity("GalleryApplication.Models.Follower", b =>
+            modelBuilder.Entity("GalleryApplication.Models.Follow", b =>
                 {
                     b.HasOne("GalleryApplication.Models.AppUser", "FollowedUser")
                         .WithMany("FollowedByUsers")

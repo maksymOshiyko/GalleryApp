@@ -1,0 +1,46 @@
+﻿@model List<Post>
+
+@{
+    ViewBag.Title = "Posts";
+    Layout = "_Layout";
+}
+
+<div class="container">
+  <div class="row">
+    @if (Model.Any())
+    {
+      foreach(var post in Model)
+      {
+        <div class="col-md-4">
+          <div class="card mb-4 box-shadow">
+            <a asp-controller="Posts" asp-action="Detail" asp-route-postId="@post.PostId">
+            <img class="card-img-top" src="@post.PhotoUrl" style="height: 225px; width: 100%; display: block;" data-holder-rendered="true">
+            </a>
+            <div class="card-body">
+              <p class="card-text">
+                <a asp-controller="Users" asp-action="Detail" asp-route-username="@post.User.UserName">
+                  @post.User.UserName
+                </a> - @post.User.FirstName @post.User.LastName
+              </p>
+              <p class="card-text">@post.Description</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <i class="fa fa-heart" style="color: red"></i> @post.Likes.Count()
+                </div>
+                <small class="text-muted">@post.Created.ToShortDateString()</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    }
+    else
+    {
+      <h3 class="text-center">No new posts...Follow more people to see more</h3>
+    }
+  </div>
+  
+</div>
+
+
+

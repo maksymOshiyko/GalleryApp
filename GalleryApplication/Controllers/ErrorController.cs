@@ -9,5 +9,10 @@ namespace GalleryApplication.Controllers
         {
             return View(error);
         }
+
+        public IActionResult NotFoundResponse()
+        {
+            return View();
+        }
     }
 }
