@@ -96,3 +96,17 @@ E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net
 E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net5.0\Razor\Views\Posts\AddPost.cshtml.g.cs
 E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net5.0\Razor\Views\Posts\Detail.cshtml.g.cs
 E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net5.0\Razor\Views\Posts\Index.cshtml.g.cs
+E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net5.0\Razor\Views\Users\UpdateUser.cshtml.g.cs
+E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net5.0\Razor\Views\Users\Charts.cshtml.g.cs
+E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\bin\Debug\net5.0\ClosedXML.dll
+E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\bin\Debug\net5.0\DocumentFormat.OpenXml.dll
+E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\bin\Debug\net5.0\ExcelNumberFormat.dll
+E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\bin\Debug\net5.0\System.IO.Packaging.dll
+E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net5.0\Razor\Views\Admin\EditRoles.cshtml.g.cs
+E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net5.0\Razor\Views\Admin\Index.cshtml.g.cs
+E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net5.0\Razor\Views\Error\ServerError.cshtml.g.cs
+E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net5.0\Razor\Views\Account\ChangePassword.cshtml.g.cs
+E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net5.0\Razor\Views\Home\PasswordSaving.cshtml.g.cs
+E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\bin\Debug\net5.0\MailKit.dll
+E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\bin\Debug\net5.0\MimeKit.dll
+E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\bin\Debug\net5.0\BouncyCastle.Crypto.dll

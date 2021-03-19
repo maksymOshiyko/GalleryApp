@@ -1,9 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using GalleryApplication.Helpers;
 using GalleryApplication.Interfaces;
 using GalleryApplication.Models;
+using GalleryApplication.Services;
 using GalleryApplication.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -17,11 +19,13 @@ namespace GalleryApplication.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IPhotoService _photoService;
 
-        public UsersController(IUnitOfWork unitOfWork, IMapper mapper)
+        public UsersController(IUnitOfWork unitOfWork, IMapper mapper, IPhotoService photoService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _photoService = photoService;
         }
         
         [HttpGet]
@@ -107,18 +111,85 @@ namespace GalleryApplication.Controllers
             return RedirectToAction("Detail", "Users", new {username});
         }
 
-        // [HttpGet]
-        // [Route("[controller]/Update")]
-        // public async Task<IActionResult> UpdateUser()
-        // {
-        //     
-        // }
-        
-        // [HttpPost]
-        // [Route("[controller]/Update")]
-        // public async Task<IActionResult> UpdateUser(IFormFile file, )
-        // {
-        //     
-        // }
+        [HttpGet]
+        [Route("[controller]/Update")]
+        public async Task<IActionResult> UpdateUser()
+        {
+            var currentUser = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.Identity.Name);
+            
+            var countries = (await _unitOfWork.CountryRepository.GetAllCountriesAsync()).Select(x => x.CountryName);
+            SelectList selectList = new SelectList(countries);
+            ViewBag.Countries = selectList;
+            
+            var model = new UpdateUserViewModel()
+            {
+                Country = currentUser.Country.CountryName,
+                Gender = currentUser.Gender,
+                FirstName = currentUser.FirstName,
+                LastName = currentUser.LastName,
+                DateOfBirth = currentUser.DateOfBirth.ToShortDateString()
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        [Route("[controller]/Update")]
+        public async Task<IActionResult> UpdateUser(UpdateUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if(model.Country == "Choose country") ModelState.AddModelError("Country", "Choose country");
+
+                if (ModelState.IsValid)
+                {
+                    var currentUser = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.Identity.Name);
+
+                    currentUser.Gender = currentUser.Gender != model.Gender ? model.Gender : currentUser.Gender;
+                    currentUser.FirstName = currentUser.FirstName != model.FirstName 
+                        ? model.FirstName : currentUser.FirstName;
+                    currentUser.LastName = currentUser.LastName != model.LastName 
+                        ? model.LastName : currentUser.LastName;
+                    currentUser.Country = currentUser.Country.CountryName != model.Country
+                        ? await _unitOfWork.CountryRepository.GetCountryByNameAsync(model.Country)
+                        : currentUser.Country;
+                    if (model.DateOfBirth != null)
+                    {
+                        currentUser.DateOfBirth = currentUser.DateOfBirth != Convert.ToDateTime(model.DateOfBirth)
+                            ? Convert.ToDateTime(model.DateOfBirth)
+                            : currentUser.DateOfBirth;
+                    }
+
+                    if (model.Image != null)
+                    {
+                        await _photoService.DeletePhotoAsync(currentUser.MainPhotoPublicId);
+                        var result = await _photoService.AddPhotoAsync(model.Image);
+                        if (result.Error != null)
+                        {
+                            ModelState.AddModelError("Image", "Something went wrong");
+                            return View(model);
+                        }
+                        currentUser.MainPhotoUrl = result.SecureUrl.AbsoluteUri;
+                        currentUser.MainPhotoPublicId = result.PublicId;
+                    }
+
+                    await _unitOfWork.Complete();
+
+                    return RedirectToAction("Detail", "Users",
+                        new {username = currentUser.UserName});
+                }
+            }
+
+            var countries = (await _unitOfWork.CountryRepository.GetAllCountriesAsync()).Select(x => x.CountryName);
+            SelectList selectList = new SelectList(countries);
+            ViewBag.Countries = selectList;
+            
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Charts()
+        {
+            return View();
+        }
     }
 }

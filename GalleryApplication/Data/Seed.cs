@@ -51,6 +51,7 @@ namespace GalleryApplication.Data
             IUnitOfWork unitOfWork)
         {
             string adminEmail = "admin@gmail.com";
+            string moderatorEmail = "moderator@gmail.com";
             
             if (await roleManager.FindByNameAsync("admin") == null)
             {
@@ -60,11 +61,15 @@ namespace GalleryApplication.Data
             {
                 await roleManager.CreateAsync(new IdentityRole<int>("user"));
             }
-            if (await userManager.FindByNameAsync(adminEmail) == null)
+            if (await roleManager.FindByNameAsync("moderator") == null)
+            {
+                await roleManager.CreateAsync(new IdentityRole<int>("moderator"));
+            }
+            if (await userManager.FindByNameAsync("admin") == null)
             {
                 string password = "password";
                 DateTime dateOfBirth = DateTime.Now;
-                Country country = await unitOfWork.CountryRepository.GetCountryByNameAsync("Russia");
+                Country country = await unitOfWork.CountryRepository.GetCountryByNameAsync("Ukraine");
                 AppUser admin = new AppUser()
                 {
                     Email = adminEmail, UserName = "admin", DateOfBirth = dateOfBirth,
@@ -74,6 +79,25 @@ namespace GalleryApplication.Data
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(admin, "admin");
+                    await userManager.AddToRoleAsync(admin, "moderator");
+                    await userManager.AddToRoleAsync(admin, "user");
+                }
+            }
+            if (await userManager.FindByNameAsync("moderator") == null)
+            {
+                string password = "password";
+                DateTime dateOfBirth = DateTime.Now;
+                Country country = await unitOfWork.CountryRepository.GetCountryByNameAsync("Ukraine");
+                AppUser moderator = new AppUser()
+                {
+                    Email = moderatorEmail, UserName = "moderator", DateOfBirth = dateOfBirth,
+                    Country = country, FirstName = "Moder", LastName = "Moderator", Gender = "male",
+                };
+                IdentityResult result = await userManager.CreateAsync(moderator, password);
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(moderator, "moderator");
+                    await userManager.AddToRoleAsync(moderator, "user");
                 }
             }
         }
@@ -81,7 +105,7 @@ namespace GalleryApplication.Data
         public static async Task SeedUsers(UserManager<AppUser> userManager, RoleManager<IdentityRole<int>> roleManager,
             DataContext dataContext, IUnitOfWork unitOfWork)
         {
-            if (await userManager.Users.CountAsync() > 1) return;
+            if (await userManager.Users.CountAsync() > 2) return;
 
             var userData = await System.IO.File.ReadAllTextAsync("Data/UserSeedData.json");
             var users = JsonSerializer.Deserialize<List<AppUser>>(userData);

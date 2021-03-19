@@ -14,5 +14,10 @@ namespace GalleryApplication.Controllers
         {
             return View();
         }
+
+        public IActionResult ServerError(string msg)
+        {
+            return View(msg);
+        }
     }
 }

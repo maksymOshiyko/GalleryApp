@@ -50,6 +50,14 @@
             }
           </div>
         }
+        @if (Context.User.IsInRole("admin"))
+        {
+          <div class="card-footer">
+            <button style="width: 100%; color: red" class="text-center btn">
+              <a asp-controller="Admin" asp-action="EditRoles" asp-route-username="@Model.UserName">Edit user roles</a>
+            </button>
+          </div>
+        }
       </div>
     </div>
     <div class="col-8">

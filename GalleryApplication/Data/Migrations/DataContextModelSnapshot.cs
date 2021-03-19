@@ -205,6 +205,9 @@ namespace GalleryApplication.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("HasComplaint")
+                        .HasColumnType("bit");
+
                     b.Property<string>("PhotoPublicId")
                         .HasColumnType("nvarchar(max)");
 

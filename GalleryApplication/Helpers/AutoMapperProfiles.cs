@@ -24,7 +24,7 @@ namespace GalleryApplication.Helpers
                 .ForMember(dest => dest.Country,
                     opt =>
                         opt.MapFrom(src =>
-                            _unitOfWork.CountryRepository.GetCountryByNameAsync(src.Country))); 
+                            _unitOfWork.CountryRepository.GetCountryByNameAsync(src.Country)));
         }
     }
 }

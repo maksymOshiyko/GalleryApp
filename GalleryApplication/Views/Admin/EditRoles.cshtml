@@ -1,0 +1,26 @@
+﻿@model GalleryApplication.ViewModels.EditRolesViewModel
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<div class="container">
+  <h2>Role editing</h2>
+  <form asp-controller="Admin" asp-action="EditRoles">
+    <fieldset class="form-group">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" asp-for="Admin" checked="@Model.Admin">
+          Admin
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" asp-for="Moderator" checked="@Model.Moderator">
+          Moderator
+        </label>
+      </div>
+      <button type="submit" class="btn btn-success mt-2">Edit</button>
+    </fieldset>
+  </form>
+</div>

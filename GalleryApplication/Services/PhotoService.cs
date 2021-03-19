@@ -30,7 +30,7 @@ namespace GalleryApplication.Services
                 {
                     File = new FileDescription(file.FileName, stream),
                     Folder = "GalleryApp",
-                    Transformation = new Transformation().Height(500).Width(500).Crop("fill").Gravity("face"),
+                    Transformation = new Transformation().Height(500).Width(500).Crop("scale")
                 };
                 uploadResult = await _cloudinary.UploadAsync(uploadParams);
             }

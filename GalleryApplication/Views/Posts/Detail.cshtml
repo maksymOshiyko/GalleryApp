@@ -34,11 +34,20 @@
                 </form>
             }
         </div>
-        @if (Model.User.UserName == Context.User.Identity.Name)
+        @if (Model.User.UserName == Context.User.Identity.Name 
+             || Context.User.IsInRole("admin") || Context.User.IsInRole("moderator"))
         {
             <div class="card-footer">
                 <form asp-controller="Posts" asp-action="DeletePost" asp-route-postId="@Model.PostId">
                     <button style="width: 100%; color: red" class="text-center btn">Delete post</button>
+                </form>
+            </div>
+        }
+        else
+        {
+            <div class="card-footer">
+                <form asp-controller="Posts" asp-action="ComplainPost" asp-route-postId="@Model.PostId">
+                    <button style="width: 100%; color: red" class="text-center btn">Complain post</button>
                 </form>
             </div>
         }

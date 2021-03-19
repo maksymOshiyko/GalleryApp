@@ -57,5 +57,10 @@ namespace GalleryApplication.Data
             
             return posts;
         }
+
+        public async Task<List<Post>> GetPostsWithComplaints()
+        {
+            return await _context.Posts.Where(x => x.HasComplaint).ToListAsync();
+        }
     }
 }

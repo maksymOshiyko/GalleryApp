@@ -1,0 +1,51 @@
+﻿@model List<Post>
+@{
+    ViewBag.Title = "Admin";
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="text-center">Complaints</h4>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                @if (Model.Any())
+                {
+                    foreach (var post in Model)
+                    {
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col text-center border-right">
+                                    <p>Photo</p>
+                                    <img src="@post.PhotoUrl" alt="photo" style="width: 75%; height: 75%">
+                                </div>
+                                <div class="col border-right">
+                                    <p class="text-center">Description</p>
+                                    @post.Description
+                                </div>
+                                <div class="col text-center">
+                                    <p>Actions</p>
+                                    <div>
+                                        <form class="float-left" asp-controller="Posts" asp-action="SavePost" asp-route-postId="@post.PostId">
+                                            <button class="btn btn-primary">Save post</button>
+                                        </form>
+                                        <form class="float-right" asp-controller="Posts" asp-action="DeletePost" asp-route-postId="@post.PostId">
+                                            <button class="btn btn-danger">Delete post</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <h4 class="text-center">No posts to inspect</h4>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+

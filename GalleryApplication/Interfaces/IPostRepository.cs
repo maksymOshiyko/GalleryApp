@@ -10,6 +10,7 @@ namespace GalleryApplication.Interfaces
         void AddPost(Post post);
         void DeletePost(Post post);
         Task<List<Post>> GetPostsForUser(string username);
-        
+        Task<List<Post>> GetPostsWithComplaints();
+
     }
 }

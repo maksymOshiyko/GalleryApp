@@ -120,6 +120,42 @@ namespace GalleryApplication.Controllers
             return RedirectToAction("Index", "Home");
         }
         
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.Identity.Name);
+            
+            if (ModelState.IsValid)
+            {
+                if (user != null)
+                {
+                    IdentityResult result = 
+                        await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                    if(result.Succeeded)
+                    {
+                        return RedirectToAction("PasswordSaving", "Home");
+                    }
+                    
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    
+                }
+                else
+                {
+                    return RedirectToAction("NotFoundResponse", "Error");
+                }
+            }
+            return View(model);
+        }
+        
         private async Task<bool> UserExists(string username)
         {
             return await _userManager.Users.AnyAsync(x => x.UserName == username.ToLower());

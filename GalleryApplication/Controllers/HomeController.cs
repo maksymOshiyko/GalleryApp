@@ -24,6 +24,12 @@ namespace GalleryApplication.Controllers
             return View();
         }
         
+        [HttpGet]
+        public IActionResult PasswordSaving()
+        {
+            return View();
+        }
+        
         public IActionResult Privacy()
         {
             return View();

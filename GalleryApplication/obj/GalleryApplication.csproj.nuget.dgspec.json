@@ -48,9 +48,17 @@
               "target": "Package",
               "version": "[8.1.1, )"
             },
+            "ClosedXML": {
+              "target": "Package",
+              "version": "[0.95.4, )"
+            },
             "CloudinaryDotNet": {
               "target": "Package",
               "version": "[1.11.0, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[2.11.1, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",

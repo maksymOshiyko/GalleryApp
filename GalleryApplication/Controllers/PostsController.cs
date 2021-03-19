@@ -164,5 +164,30 @@ namespace GalleryApplication.Controllers
             
             return RedirectToAction("Detail", "Posts", new {postId});
         }
+
+        [Authorize(Roles = "moderator, admin")]
+        [HttpPost]
+        public async Task<IActionResult> SavePost(int postId)
+        {
+            var post = await _unitOfWork.PostRepository.GetPostByIdAsync(postId);
+            
+            post.HasComplaint = false;
+
+            await _unitOfWork.Complete();
+            
+            return RedirectToAction("Index", "Admin");
+        }
+
+        [HttpPost("/Posts/Detail/{postId}")]
+        public async Task<IActionResult> ComplainPost(int postId)
+        {
+            var post = await _unitOfWork.PostRepository.GetPostByIdAsync(postId);
+
+            post.HasComplaint = true;
+
+            await _unitOfWork.Complete();
+
+            return RedirectToAction("Detail", "Posts", new {post.PostId});
+        }
     }
 }

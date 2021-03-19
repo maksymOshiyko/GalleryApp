@@ -24,7 +24,10 @@ namespace GalleryApplication.Data
 
         public async Task<List<Country>> GetAllCountriesAsync()
         {
-            return await _context.Countries.ToListAsync();
+            return await _context.Countries
+                .Include(c => c.Users)
+                .OrderBy(x => x.CountryName)
+                .ToListAsync();
         }
     }
 }

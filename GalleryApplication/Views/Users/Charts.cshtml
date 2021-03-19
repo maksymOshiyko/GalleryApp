@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <div class="row">
+        <div id="chart1"></div>
+        <div id="chart2"></div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            $.get('/api/Charts/GenderData', function(JsonData) {
+                data = google.visualization.arrayToDataTable(JsonData, false);
+                var option = {
+                    title: "Genders of users",
+                    width: 500,
+                    height: 400
+                };
+                chart = new google.visualization.PieChart(document.getElementById('chart1'));
+                chart.draw(data, option);
+            });
+            
+            $.get('/api/Charts/CountryData', function(JsonData) {
+                 data = google.visualization.arrayToDataTable(JsonData, false);
+                 var option = {
+                     title: "Countries of users",
+                     width: 500,
+                     height: 400
+                 };
+                 chart = new google.visualization.PieChart(document.getElementById('chart2'));
+                 chart.draw(data, option);
+            });
+                        
+        }
+    </script>
+}
+
+
+
+
