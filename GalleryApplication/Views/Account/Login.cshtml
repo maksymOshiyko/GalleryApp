@@ -14,9 +14,9 @@
           <input type="password" class="form-control" name="password" aria-describedby="passwordHelp" id="password" placeholder="Password">
           <small id="passwordHelp" class="form-text text-muted">We'll never share your password with anyone else.</small>
         </div>
-        @if (ViewBag.LoginError == true)
+        @if (ViewBag.LoginError != null)
         {
-          <small class="form-text mb-2" style="color: red">Invalid credentials</small>
+          <small class="form-text mb-2" style="color: red">@ViewBag.LoginError</small>
         }
         <button type="submit" class="btn btn-success" style="width: 100%">Login</button>
       </form>

@@ -2,6 +2,7 @@
 using AutoMapper;
 using GalleryApplication.Interfaces;
 using GalleryApplication.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace GalleryApplication.Data
 {
@@ -9,14 +10,16 @@ namespace GalleryApplication.Data
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
+        private readonly UserManager<AppUser> _userManager;
 
-        public UnitOfWork(DataContext context, IMapper mapper)
+        public UnitOfWork(DataContext context, IMapper mapper, UserManager<AppUser> userManager)
         {
             _context = context;
             _mapper = mapper;
+            _userManager = userManager;
         }
         
-        public IUserRepository UserRepository => new UserRepository(_context, _mapper);
+        public IUserRepository UserRepository => new UserRepository(_context, _mapper, _userManager);
         public ICountryRepository CountryRepository => new CountryRepository(_context);
         public IPostRepository PostRepository => new PostRepository(_context);
         public ILikeRepository LikeRepository => new LikeRepository(_context);

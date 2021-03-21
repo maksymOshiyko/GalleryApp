@@ -11,5 +11,7 @@ namespace GalleryApplication.Interfaces
         Task<AppUser> GetUserByUsernameAsync(string username);
         Task FollowUser(AppUser sourceUser, AppUser followedUser);
         Task UnfollowUser(AppUser sourceUser, AppUser followedUser);
+        Task DeleteUser(AppUser user);
+        Task<List<AppUser>> GetUsersForExport();
     }
 }

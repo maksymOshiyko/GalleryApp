@@ -72,6 +72,7 @@ namespace GalleryApplication.Data
             {
                 entity.HasOne(d => d.LikeSender)
                     .WithMany(p => p.Likes)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasForeignKey(d => d.LikeSenderId);
 
                 entity.HasOne(d => d.Post)
@@ -83,6 +84,7 @@ namespace GalleryApplication.Data
             {
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Posts)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasForeignKey(d => d.UserId);
             });
             

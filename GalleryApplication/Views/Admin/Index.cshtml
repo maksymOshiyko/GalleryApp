@@ -5,6 +5,14 @@
 }
 
 <div class="container">
+    <div>
+        @if (Context.User.IsInRole("admin"))
+        {
+            <a type="button" asp-controller="Admin" asp-action="UsersControl" class="text-light">
+                <button class="btn btn-primary mb-2">Users Control</button>
+            </a>
+        }
+    </div>
     <div class="card">
         <div class="card-header">
             <h4 class="text-center">Complaints</h4>
@@ -15,7 +23,7 @@
                 {
                     foreach (var post in Model)
                     {
-                        <li class="list-group-item">
+                        <li class="list-group-item p-0">
                             <div class="row">
                                 <div class="col text-center border-right">
                                     <p>Photo</p>

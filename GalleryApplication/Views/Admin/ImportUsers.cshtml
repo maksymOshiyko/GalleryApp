@@ -1,0 +1,20 @@
+﻿
+
+@{
+    ViewBag.Title = "Users importing";
+    Layout = "_Layout";
+}
+
+<div class="container text-center">
+    @if (ViewBag.Succeeded)
+    {
+        <h3>Valid users was successfully added</h3> 
+    }
+    else
+    {
+        <h3>File is empty or data is invalid</h3>
+    }
+    <a type="button" asp-controller="Admin" asp-action="UsersControl">
+        <button class="btn btn-primary">Back to users control</button>
+    </a>
+</div>

@@ -1,12 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GalleryApplication.Helpers;
 using GalleryApplication.Interfaces;
 using GalleryApplication.Models;
 using GalleryApplication.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using IMapper = AutoMapper.IMapper;
 
 namespace GalleryApplication.Controllers
 {
@@ -15,11 +19,16 @@ namespace GalleryApplication.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IExcelService _excelService;
+        private readonly IMapper _mapper;
 
-        public AdminController(IUnitOfWork unitOfWork, UserManager<AppUser> userManager)
+        public AdminController(IUnitOfWork unitOfWork, UserManager<AppUser> userManager, IExcelService excelService, 
+            IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _userManager = userManager;
+            _excelService = excelService;
+            _mapper = mapper;
         }
 
        
@@ -27,6 +36,24 @@ namespace GalleryApplication.Controllers
         {
             var posts = await _unitOfWork.PostRepository.GetPostsWithComplaints();
             return View(posts);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> UsersControl()
+        {
+            var users = (await _unitOfWork.UserRepository.GetUsersAsync(new UserFilterParams()))
+                .Where(x => x.UserName != User.Identity.Name);
+            return View(users);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(string username)
+        {
+            await _unitOfWork.UserRepository.DeleteUser(
+                await _unitOfWork.UserRepository.GetUserByUsernameAsync(username));
+            await _unitOfWork.Complete();
+            return RedirectToAction("UsersControl", "Admin");
         }
         
         [Authorize(Roles = "admin")]
@@ -72,6 +99,46 @@ namespace GalleryApplication.Controllers
                 new {msg = "Something went wrong."});
             
             return RedirectToAction("Index", "Admin");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ImportUsers(IFormFile file)
+        {
+            var usersData = await _excelService.ImportUsers(file);
+            ViewBag.Succeeded = true;
+            
+            if (!usersData.Any())
+            {
+                ViewBag.Succeeded = false;
+                return View();
+            }
+
+            foreach (var userData in usersData)
+            {
+                var user = _mapper.Map<AppUser>(userData);
+                user.Country = await _unitOfWork.CountryRepository.GetCountryByNameAsync(userData.Country);
+                user.UserName = userData.UserName.ToLower();
+
+                var result = await _userManager.CreateAsync(user, userData.Password);
+
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, "User");
+                    user.EmailConfirmed = true;
+                }
+            }
+
+            await _unitOfWork.Complete();
+            
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ExportUsersInfo()
+        {
+            var stream = await _excelService.ExportUsersInfo();
+            return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                $"users_info_{DateTime.Now.ToString("g")}.xlsx");
         }
     }
 }

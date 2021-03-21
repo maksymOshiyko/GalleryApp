@@ -15,7 +15,8 @@ namespace GalleryApplication.Extensions
                     options.Password.RequireDigit = false;
                     options.Password.RequireUppercase = false;
                 })
-                .AddEntityFrameworkStores<DataContext>();
+                .AddEntityFrameworkStores<DataContext>()
+                .AddDefaultTokenProviders();
 
             return services;
         }

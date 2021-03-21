@@ -1,11 +1,12 @@
-﻿@model GalleryApplication.ViewModels.EditRolesViewModel
+﻿@using Microsoft.AspNetCore.Routing
+@model GalleryApplication.ViewModels.EditRolesViewModel
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
 
 <div class="container">
-  <h2>Role editing</h2>
+  <h2>Role editing for @Context.GetRouteData().Values["username"]</h2>
   <form asp-controller="Admin" asp-action="EditRoles">
     <fieldset class="form-group">
       <div class="form-check">

@@ -6,7 +6,7 @@ namespace GalleryApplication.ViewModels
     public class RegisterViewModel
     {
         [Required]
-        [MinLength(4), MaxLength(15)]
+        [MinLength(4), MaxLength(25)]
         public string UserName { get; set; }
         [Required]
         [MinLength(6), MaxLength(20)]

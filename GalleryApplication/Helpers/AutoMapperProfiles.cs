@@ -25,6 +25,15 @@ namespace GalleryApplication.Helpers
                     opt =>
                         opt.MapFrom(src =>
                             _unitOfWork.CountryRepository.GetCountryByNameAsync(src.Country)));
+            CreateMap<ExcelUserData, AppUser>()
+                .ForMember(dest => dest.DateOfBirth,
+                    opt =>
+                        opt.MapFrom(src => Convert.ToDateTime(src.DateOfBirth)))
+                .ForMember(dest => dest.Country,
+                    opt =>
+                        opt.MapFrom(src =>
+                            _unitOfWork.CountryRepository.GetCountryByNameAsync(src.Country)));
+            
         }
     }
 }

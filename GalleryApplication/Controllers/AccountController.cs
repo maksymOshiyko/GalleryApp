@@ -1,19 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using GalleryApplication.Data;
 using GalleryApplication.Interfaces;
 using GalleryApplication.Models;
 using GalleryApplication.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Microsoft.VisualBasic;
+
 
 namespace GalleryApplication.Controllers
 {
@@ -23,15 +20,17 @@ namespace GalleryApplication.Controllers
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly IEmailService _emailService;
         private readonly ILogger<AccountController> _logger;
 
         public AccountController(UserManager<AppUser> userManager, IMapper mapper, IUnitOfWork unitOfWork,
-            SignInManager<AppUser> signInManager, ILogger<AccountController> logger)
+            SignInManager<AppUser> signInManager, IEmailService emailService, ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             _signInManager = signInManager;
+            _emailService = emailService;
             _logger = logger;
         }
 
@@ -49,7 +48,7 @@ namespace GalleryApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (await UserExists(model.UserName)) ModelState.AddModelError("UserName", "Login is taked");
+                if (await UserExists(model.UserName)) ModelState.AddModelError("UserName", "Login is taken");
                 
                 if(await EmailExists(model.Email)) ModelState.AddModelError("Email", "Email is taken");
                 
@@ -65,9 +64,22 @@ namespace GalleryApplication.Controllers
 
                     if (result.Succeeded)
                     {
-                        var roleResult = await _userManager.AddToRoleAsync(user, "User");
-                        await _signInManager.SignInAsync(user, false);
-                        return RedirectToAction("Index", "Home");
+                        await _userManager.AddToRoleAsync(user, "User");
+                        
+                        var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        var callbackUrl = Url.Action(
+                            "ConfirmEmail",
+                            "Account",
+                            new {userId = user.Id, token},
+                             HttpContext.Request.Scheme
+                            );
+                        
+                        await _emailService.SendEmailAsync(model.Email, "Confirm your account",
+                            $"Thank you for registering MyGallery account." +
+                            $" In order to verify your account click here: <a href='{callbackUrl}'>link</a>");
+                        
+                        
+                        return RedirectToAction("AccountConfirmation", "Account");
                     }
                 }
             }
@@ -82,7 +94,7 @@ namespace GalleryApplication.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            ViewBag.LoginError = false;
+            ViewBag.LoginError = null;
             return View();
         }
         
@@ -90,22 +102,36 @@ namespace GalleryApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(string username, string password)
         {
+            if (string.IsNullOrEmpty(password) || string.IsNullOrEmpty(username))
+            {
+                ViewBag.LoginError = "Invalid input";
+                return View();
+            }
+                
             var user = await _userManager.Users
                 .SingleOrDefaultAsync(x => x.UserName == username.ToLower());
-            ViewBag.LoginError = false;
+            ViewBag.LoginError = null;
             
             if (user == null)
             {
-                ViewBag.LoginError = true;
+                ViewBag.LoginError = "Invalid credentials";
                 return View();
+            }
+
+            if (!await _userManager.IsEmailConfirmedAsync(user))
+            {
+                if (ViewBag.LoginError == null)
+                {
+                    ViewBag.LoginError = "Confirm your email firstly";
+                    return View();
+                }
             }
 
             var result = await _signInManager.PasswordSignInAsync(username, password, true, false);
 
             if (!result.Succeeded)
-            {
-                _logger.LogInformation("1");
-                ViewBag.LoginError = true;
+            { 
+                ViewBag.LoginError = "Invalid credentials";
                 return View();
             }
 
@@ -154,6 +180,38 @@ namespace GalleryApplication.Controllers
                 }
             }
             return View(model);
+        }
+        
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            if (userId == null || token == null)
+            {
+                return View("Error");
+            }
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return View("Error");
+            }
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            if(result.Succeeded)
+                return RedirectToAction("SuccessEmailConfirmation", "Account");
+            else
+                return View("Error");
+        }
+
+        [HttpGet]
+        public IActionResult AccountConfirmation()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult SuccessEmailConfirmation()
+        {
+            return View();
         }
         
         private async Task<bool> UserExists(string username)

@@ -14,7 +14,7 @@
         <div class="col-md-4">
           <div class="card mb-4 box-shadow">
             <a asp-controller="Posts" asp-action="Detail" asp-route-postId="@post.PostId">
-            <img class="card-img-top" src="@post.PhotoUrl" style="height: 225px; width: 100%; display: block;" data-holder-rendered="true">
+              <img class="card-img-top" src="@post.PhotoUrl" style="height: 225px; width: 100%; display: block;" data-holder-rendered="true">
             </a>
             <div class="card-body">
               <p class="card-text">
@@ -34,12 +34,11 @@
         </div>
       }
     }
-    else
-    {
-      <h3 class="text-center">No new posts...Follow more people to see more</h3>
-    }
   </div>
-  
+  @if (!Model.Any())
+  {
+    <h4 class="text-center">No new posts, follow people to see more.</h4>
+  }
 </div>
 
 

@@ -74,6 +74,7 @@ namespace GalleryApplication.Data
                 {
                     Email = adminEmail, UserName = "admin", DateOfBirth = dateOfBirth,
                     Country = country, FirstName = "Maksym", LastName = "Oshyiko", Gender = "male",
+                    EmailConfirmed = true
                 };
                 IdentityResult result = await userManager.CreateAsync(admin, password);
                 if (result.Succeeded)
@@ -92,6 +93,7 @@ namespace GalleryApplication.Data
                 {
                     Email = moderatorEmail, UserName = "moderator", DateOfBirth = dateOfBirth,
                     Country = country, FirstName = "Moder", LastName = "Moderator", Gender = "male",
+                    EmailConfirmed = true
                 };
                 IdentityResult result = await userManager.CreateAsync(moderator, password);
                 if (result.Succeeded)
@@ -114,13 +116,13 @@ namespace GalleryApplication.Data
             foreach (var user in users)
             {
                 user.Country = await unitOfWork.CountryRepository.GetCountryByNameAsync(user.Country.CountryName);
+                user.EmailConfirmed = true;
                 IdentityResult result = await userManager.CreateAsync(user, "password");
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(user, "user");
                 } 
             }
-            
             
             await dataContext.SaveChangesAsync();
         }

@@ -15,11 +15,13 @@ namespace GalleryApplication.Data
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
+        private readonly UserManager<AppUser> _userManager;
 
-        public UserRepository(DataContext context, IMapper mapper)
+        public UserRepository(DataContext context, IMapper mapper, UserManager<AppUser> userManager)
         {
             _context = context;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         public async Task<IEnumerable<AppUser>> GetUsersAsync(UserFilterParams userFilterParams)
@@ -83,6 +85,24 @@ namespace GalleryApplication.Data
             Follow follow = await _context.Follows.SingleOrDefaultAsync(x => 
                 x.SourceUser == sourceUser && x.FollowedUser == followedUser); 
             _context.Follows.Remove(follow);
+        }
+
+        public async Task DeleteUser(AppUser user)
+        {
+            var followsToDelete = _context.Follows.Where(x => x.FollowedUserId == user.Id
+                                                              && x.SourceUserId == user.Id);
+            _context.Follows.RemoveRange(followsToDelete);
+            await _userManager.DeleteAsync(user);
+        }
+
+        public async Task<List<AppUser>> GetUsersForExport()
+        {
+            return await _context.Users
+                .Include(f => f.FollowedUsers)
+                .Include(f => f.FollowedByUsers)
+                .Include(c => c.Comments)
+                .Include(l => l.Likes)
+                .ToListAsync();
         }
     }
 }
