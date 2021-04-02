@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using GalleryApplication.Interfaces;
-using MimeKit;
-using MailKit.Net.Smtp;
-using MailKit.Security;
+
 
 namespace GalleryApplication.Services
 {
@@ -10,23 +10,27 @@ namespace GalleryApplication.Services
     {
         public async Task SendEmailAsync(string email, string subject, string message)
         {
-            var emailMessage = new MimeMessage();
- 
-            emailMessage.From.Add(new MailboxAddress("Administration", "galleryweb1@gmail.com"));
-            emailMessage.To.Add(new MailboxAddress("", email));
-            emailMessage.Subject = subject;
-            emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
+            var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
+            var mailMessage = new MailMessage();
+            mailMessage.To.Add(new MailAddress(email)); 
+            mailMessage.From = new MailAddress("galleryweb1@gmail.com");  
+            mailMessage.Subject = subject;
+            mailMessage.Body = string.Format(body, "Administration", "galleryweb1@gmail.com", message);
+            mailMessage.IsBodyHtml = true;
+
+            using (var smtp = new SmtpClient())
             {
-                Text = message
-            };
-             
-            using (var client = new SmtpClient())
-            {
-                await client.ConnectAsync("smtp.mailtrap.io", 25, false);
-                await client.AuthenticateAsync("565407f7eefd1e", "3335b20c396f8e");
-                await client.SendAsync(emailMessage);
- 
-                await client.DisconnectAsync(true);
+                var credential = new NetworkCredential
+                {
+                    UserName = "galleryweb1@gmail.com",  
+                    Password = "bluelamborgini123"  
+                };
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = credential;
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.EnableSsl = true;
+                await smtp.SendMailAsync(mailMessage);
             }
         }
     }

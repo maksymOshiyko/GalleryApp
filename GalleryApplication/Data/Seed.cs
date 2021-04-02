@@ -17,32 +17,10 @@ namespace GalleryApplication.Data
         {
             if (await dataContext.Countries.AnyAsync()) return;
 
-            var countries = new List<Country>
-            {
-                {new Country() {CountryName = "Russia"}},
-                {new Country() {CountryName = "Ukraine"}},
-                {new Country() {CountryName = "France"}},
-                {new Country() {CountryName = "Spain"}},
-                {new Country() {CountryName = "Sweden"}},
-                {new Country() {CountryName = "Norway"}},
-                {new Country() {CountryName = "Germany"}},
-                {new Country() {CountryName = "Finland"}},
-                {new Country() {CountryName = "Poland"}},
-                {new Country() {CountryName = "Italy"}},
-                {new Country() {CountryName = "Great Britain"}},
-                {new Country() {CountryName = "Romania"}},
-                {new Country() {CountryName = "Belarus"}},
-                {new Country() {CountryName = "Greece"}},
-                {new Country() {CountryName = "Bulgaria"}},
-                {new Country() {CountryName = "Iceland"}},
-                {new Country() {CountryName = "Hungary"}},
-                {new Country() {CountryName = "Portugal"}},
-                {new Country() {CountryName = "USA"}},
-                {new Country() {CountryName = "Canada"}},
-                {new Country() {CountryName = "Australia"}},
-                {new Country() {CountryName = "Lebanon"}}
-            };
-            
+            var countryData = await System.IO.File.ReadAllTextAsync("Data/CountrySeedData.json");
+            var countries = JsonSerializer.Deserialize<List<Country>>(countryData);
+            if (countries == null) return;
+
             await dataContext.Countries.AddRangeAsync(countries);
             await dataContext.SaveChangesAsync();
         }

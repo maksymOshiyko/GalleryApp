@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using GalleryApplication.Interfaces;
@@ -54,6 +55,9 @@ namespace GalleryApplication.Controllers
                 
                 if(model.Country == "Choose country") ModelState.AddModelError("Country", "Choose country");
                 
+                if(DateTime.Now.Year - Convert.ToDateTime(model.DateOfBirth).Year > 100)
+                    ModelState.AddModelError("DateOfBirth", "Invalid date of birth");
+                
                 var user = _mapper.Map<AppUser>(model);
                 user.Country = await _unitOfWork.CountryRepository.GetCountryByNameAsync(model.Country);
                 user.UserName = model.UserName.ToLower();
@@ -73,12 +77,21 @@ namespace GalleryApplication.Controllers
                             new {userId = user.Id, token},
                              HttpContext.Request.Scheme
                             );
+
+                        await _signInManager.PasswordSignInAsync(model.UserName, model.Password,
+                                true, false)
+                            .ContinueWith(x =>
+                                _emailService.SendEmailAsync(model.Email, "Confirm your account",
+                                    $"Thank you for registering MyGallery account." +
+                                    $" In order to verify your account click here: <a href='{callbackUrl}'>link</a>"))
+                            .ContinueWith(x =>
+                                _signInManager.SignOutAsync());
                         
-                        await _emailService.SendEmailAsync(model.Email, "Confirm your account",
-                            $"Thank you for registering MyGallery account." +
-                            $" In order to verify your account click here: <a href='{callbackUrl}'>link</a>");
-                        
-                        
+                        // await _emailService.SendEmailAsync(model.Email, "Confirm your account",
+                        //     $"Thank you for registering MyGallery account." +
+                        //     $" In order to verify your account click here: <a href='{callbackUrl}'>link</a>")
+                        //     .ContinueWith(x => _signInManager.SignOutAsync());
+
                         return RedirectToAction("AccountConfirmation", "Account");
                     }
                 }
