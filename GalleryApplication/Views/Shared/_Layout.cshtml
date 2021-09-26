@@ -30,9 +30,12 @@
                         <li>
                             <a class="nav-link" asp-controller="Posts" asp-action="Index">Posts</a>
                         </li>
-                        <li>
-                            <a class="nav-link" asp-controller="Users" asp-action="Charts">Charts</a>
-                        </li>
+                        @if (Context.User.IsInRole("moderator"))
+                        {
+                            <li>
+                                <a class="nav-link" asp-controller="Users" asp-action="Charts">Charts</a>
+                            </li>
+                        }
                     }
                 </ul>
                 @if (Context.User.Identity.Name != null)

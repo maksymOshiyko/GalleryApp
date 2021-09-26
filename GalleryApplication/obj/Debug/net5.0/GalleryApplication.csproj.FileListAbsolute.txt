@@ -9,7 +9,6 @@ E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\bin\Debug\net
 E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\bin\Debug\net5.0\GalleryApplication.pdb
 E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\bin\Debug\net5.0\GalleryApplication.Views.dll
 E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\bin\Debug\net5.0\GalleryApplication.Views.pdb
-E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net5.0\GalleryApplication.csprojAssemblyReference.cache
 E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net5.0\GalleryApplication.GeneratedMSBuildEditorConfig.editorconfig
 E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net5.0\GalleryApplication.AssemblyInfoInputs.cache
 E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net5.0\GalleryApplication.AssemblyInfo.cs
@@ -112,3 +111,4 @@ E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net
 E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net5.0\Razor\Views\Admin\ImportUsers.cshtml.g.cs
 E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net5.0\Razor\Views\Admin\UsersControl.cshtml.g.cs
 E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\bin\Debug\net5.0\Data\CountrySeedData.json
+E:\programming\univ\oop\lab1\GalleryApplication\GalleryApplication\obj\Debug\net5.0\GalleryApplication.csproj.AssemblyReference.cache

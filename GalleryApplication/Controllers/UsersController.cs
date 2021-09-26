@@ -187,6 +187,7 @@ namespace GalleryApplication.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "moderator")]
         public IActionResult Charts()
         {
             return View();

@@ -59,7 +59,8 @@ namespace GalleryApplication.Services
                                 if (isValid)
                                 {
                                     users.Add(user);
-                                } 
+                                }
+                                
                             }
                         }
                     }

@@ -29,7 +29,7 @@ namespace GalleryApplication.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-1S8GL46; Database=GalleryDb; Trusted_Connection=True;",
+                optionsBuilder.UseSqlServer("Server=localhost; Database=GalleryDb; Trusted_Connection=True;",
                     options =>
                     {
                         
